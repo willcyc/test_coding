@@ -1,0 +1,8 @@
+1、编写用例格式要求：
+（1）用例Excel表格中，头部必须为以下参数：interface_name、headers、domain_name、addre、data_type、data、request_type、Actual_results、extract_word、reference_parameter、reference_header
+（2）参数的提取：请求参数/请求头依赖其他接口返回值时，在extract_word列中提取要依赖的接口的返回值关键字，如："objectName":","memberId":","gqCreateId":","linkMan":","linkPhone":","source":",（引用多个参数时用逗号分隔）
+（3）参数的引用：在reference_parameter或reference_header对应的列中，写入要引用参数的interface_name，且在后面加序号以便区分，如：供应详细页_0,登录后供应列表页_0
+（4）引用非接口返回的参数时，在api_config_file.py文件的parameters_list字典中添加，再在测试用例中引用
+2、mysteel_api_cases：
+（1）需登录帅小伙拉卡拉微信；
+（2）19100000000、19100000001账号为本测试用例专属测试账号，勿动；
