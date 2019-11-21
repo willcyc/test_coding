@@ -1,9 +1,8 @@
 import pandas as pd
 from api_request import request_results
 import sys
-import os
-current_path = os.path.abspath('../').replace('\\','/')  #windows环境
-# current_path = os.path.abspath('./')  #Mac环境
+from os.path import dirname, abspath
+current_path = dirname(dirname(abspath(__file__)))
 sys.path.append(current_path)
 from common_file import sendDD
 from common_file import my_logger
