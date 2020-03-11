@@ -6,23 +6,25 @@ def request_api_post_form(url, headers, data):
     data_ = ast.literal_eval(data)
     # response = requests.post(url, headers=ast.literal_eval(headers), data=data_, timeout=(3, 3)).text
     response = requests.post(url, headers=ast.literal_eval(headers), data=data_, timeout=(5, 5))
-    response_time = response.elapsed.total_seconds()
-    return response.text, response_time
-
+    response_time = response.elapsed.total_seconds()  # 单位为秒
+    # return response.text, response_time
+    return response, response_time
 
 def request_api_post_json(url, headers, data):
     data_ = ast.literal_eval(data)
     # response = requests.post(url, headers=ast.literal_eval(headers), json=data_, timeout=(3, 3)).text
     response = requests.post(url, headers=ast.literal_eval(headers), json=data_, timeout=(5, 5))
     response_time = response.elapsed.total_seconds()
-    return response.text, response_time
+    # return response.text, response_time
+    return response, response_time
 
 
 def request_api_get_form(url, headers, payload):
     # response = requests.get(url, headers=ast.literal_eval(headers), params=payload, timeout=(3, 3)).text
     response = requests.get(url, headers=ast.literal_eval(headers), params=payload, timeout=(5, 5))
     response_time = response.elapsed.total_seconds()
-    return response.text, response_time
+    # return response.text, response_time
+    return response, response_time
 
 
 def request_api_get_json(url, headers, payload):
@@ -30,7 +32,8 @@ def request_api_get_json(url, headers, payload):
     # response = requests.get(url, headers=ast.literal_eval(headers), params=payload_, timeout=(3, 3)).text
     response = requests.get(url, headers=ast.literal_eval(headers), params=payload_, timeout=(5, 5))
     response_time = response.elapsed.total_seconds()
-    return response.text, response_time
+    # return response.text, response_time
+    return response, response_time
 
 
 def request_results(domain_name, addre, headers, data_type, data, request_type, Actual_results):
@@ -50,8 +53,14 @@ def request_results(domain_name, addre, headers, data_type, data, request_type, 
     # print(res)
     # print("++++++:", res[0])
     Actual_results_ = str(Actual_results)
-    if Actual_results_ in res[0]:
-        resul = 'SUCCESS'
+    if Actual_results == 200 or Actual_results == 404:
+        if Actual_results_ in str(res[0].status_code):
+            resul = 'SUCCESS'
+        else:
+            resul = 'FAIL'
     else:
-        resul = 'FAIL'
+        if Actual_results_ in res[0].text:
+            resul = 'SUCCESS'
+        else:
+            resul = 'FAIL'
     return resul, res[0], res[1]

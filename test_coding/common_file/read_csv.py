@@ -4,7 +4,7 @@ import pandas as pd
 # 读取测试用例Excel文件
 def read_csv_file(file_path):
     df = pd.read_excel(file_path)
-    df.fillna("", inplace=True)
+    df.fillna("", inplace=True)  # 填充表格中失却的值
     test_data = []
     # 获取行号的索引，并对其进行遍历
     for i in df.index.values:

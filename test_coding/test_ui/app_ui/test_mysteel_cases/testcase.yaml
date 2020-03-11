@@ -1,0 +1,7 @@
+- id: android:id/button1
+- id: turnUpLn
+- id: ok
+- id: et
+  input: 螺纹钢
+- id: tv_a_title
+  get: text
