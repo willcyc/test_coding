@@ -601,3 +601,13 @@ b'{"msgtype": "markdown", "markdown": {"text": "### m_web_api_case\\u63a5\\u53e3
 m_web_api_caserun time20200311153606==================
 b'{"msgtype": "markdown", "markdown": {"text": "### m_web_api_case\\u63a5\\u53e3\\u6d4b\\u8bd5\\u901a\\u8fc7\\uff01\\uff01\\uff01", "title": "m_web_api_case\\u63a5\\u53e3\\u6d4b\\u8bd5\\u5168\\u90e8\\u901a\\u8fc7\\uff01\\uff01\\uff01"}}'
 <bound method Response.json of <Response [200]>>
+m_web_api_caserun time20200322205710==================
+请检查 dc/img.ms接口: /dc/img.ms?dcCodes=ST_0000156582,ST_0000156583,ST_0000156594&dcNames=%C9%CF%BA%A3%2C%BA%BC%D6%DD%2C%B1%B1%BE%A9&width=950&height=300&searchDays=301&expireTime=0&dateFormat=yyyy-MM-dd&waterMarkType=1&colors=
+HTTPConnectionPool(host='172.18.32.222', port=8888): Max retries exceeded with url: /group1/M00/19/CD/rBIg3l53YLyAN5AkAACPAoZPRr4830.PNG (Caused by ConnectTimeoutError(<urllib3.connection.HTTPConnection object at 0x000002495A19EDA0>, 'Connection to 172.18.32.222 timed out. (connect timeout=5)'))
+b'{"msgtype": "markdown", "markdown": {"text": "### \\u8bf7\\u67e5\\u770bm_web_api_case\\u63a5\\u53e3\\u8fd0\\u884c\\u65e5\\u5fd7, HTTPConnectionPool(host=\'172.18.32.222\', port=8888): Max retries exceeded with url: /group1/M00/19/CD/rBIg3l53YLyAN5AkAACPAoZPRr4830.PNG (Caused by ConnectTimeoutError(<urllib3.connection.HTTPConnection object at 0x000002495A19EDA0>, \'Connection to 172.18.32.222 timed out. (connect timeout=5)\'))", "title": "m_web_api_case\\u63a5\\u53e3\\u65e5\\u5fd7\\u9884\\u8b66"}}'
+<bound method Response.json of <Response [200]>>
+m_web_api_caserun time20200322212516==================
+请检查 dc/img.ms接口: /dc/img.ms?dcCodes=ST_0000156582,ST_0000156583,ST_0000156594&dcNames=%C9%CF%BA%A3%2C%BA%BC%D6%DD%2C%B1%B1%BE%A9&width=950&height=300&searchDays=301&expireTime=0&dateFormat=yyyy-MM-dd&waterMarkType=1&colors=
+HTTPConnectionPool(host='172.18.32.222', port=8888): Max retries exceeded with url: /group1/M00/19/CD/rBIg3l53YLyAN5AkAACPAoZPRr4830.PNG (Caused by ConnectTimeoutError(<urllib3.connection.HTTPConnection object at 0x0000022BA5798470>, 'Connection to 172.18.32.222 timed out. (connect timeout=5)'))
+b'{"msgtype": "markdown", "markdown": {"text": "### \\u8bf7\\u67e5\\u770bm_web_api_case\\u63a5\\u53e3\\u8fd0\\u884c\\u65e5\\u5fd7, HTTPConnectionPool(host=\'172.18.32.222\', port=8888): Max retries exceeded with url: /group1/M00/19/CD/rBIg3l53YLyAN5AkAACPAoZPRr4830.PNG (Caused by ConnectTimeoutError(<urllib3.connection.HTTPConnection object at 0x0000022BA5798470>, \'Connection to 172.18.32.222 timed out. (connect timeout=5)\'))", "title": "m_web_api_case\\u63a5\\u53e3\\u65e5\\u5fd7\\u9884\\u8b66"}}'
+<bound method Response.json of <Response [200]>>

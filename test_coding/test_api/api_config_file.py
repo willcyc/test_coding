@@ -1,4 +1,5 @@
 import sys
+import ast
 import pandas as pd
 from api_request import request_results
 from os.path import dirname, abspath
@@ -30,7 +31,7 @@ def config_program(url, file_path):
     for i in read_csv.read_csv_file(file_path):
         try:
             # 引用保存的参数
-            reference_name = ['reference_parameter', 'reference_header']
+            reference_name = ['reference_parameter', 'reference_header', 'cookies']
             for name_ in reference_name:
                 if len(i[name_]) == 0:
                     pass
@@ -51,9 +52,13 @@ def config_program(url, file_path):
                             elif name_ == 'reference_header':
                                 header_ = i['headers'].split(k)
                                 i['headers'] = header_[0] + str(parameters_list[k]) + header_[1]
-
+                            elif name_ == 'cookies':
+                                if len(i['cookies']) > 0:
+                                    i['cookies'] = ast.literal_eval(str(parameters_list[k]))
+                                else:
+                                    i['cookies'] = None
             # 发送请求
-            response_result = request_results(i['domain_name'], i['addre'], i['headers'], i['data_type'], i['data'], i['request_type'], i['Actual_results'])
+            response_result = request_results(i['domain_name'], i['addre'], i['headers'], i['data_type'], i['data'], i['request_type'], i['Actual_results'], i['cookies'])
 
             # 将结果写入字典
             for j in ("interface_name", "headers", "domain_name", "addre", "data_type", "data", "request_type", "Actual_results"):
@@ -74,10 +79,13 @@ def config_program(url, file_path):
                 for kw in list_words_:
                     if len(kw) == 0:
                         pass
-                    else:
+                    elif kw != 'cookies':
                         a = get_params.select_param(kw, response_result[1].text)
-                        parameters_list[i['interface_name'] + '_' + str(j)] = a
-                        j += 1
+                    elif kw == 'cookies':
+                        a = response_result[1].cookies.get_dict()
+                    parameters_list[i['interface_name'] + '_' + str(j)] = str(a)
+                    j += 1
+
                 # print("++++++++++:", parameters_list)
 
                 # 引用当前时间的时间戳

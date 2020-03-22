@@ -2,41 +2,42 @@ import ast
 import requests
 
 
-def request_api_post_form(url, headers, data):
+def request_api_post_form(url, headers, data, cookies=None):
     data_ = ast.literal_eval(data)
     # response = requests.post(url, headers=ast.literal_eval(headers), data=data_, timeout=(3, 3)).text
-    response = requests.post(url, headers=ast.literal_eval(headers), data=data_, timeout=(5, 5))
+    response = requests.post(url, headers=ast.literal_eval(headers), data=data_, cookies=cookies, timeout=(5, 5))
     response_time = response.elapsed.total_seconds()  # 单位为秒
     # return response.text, response_time
     return response, response_time
 
-def request_api_post_json(url, headers, data):
+
+def request_api_post_json(url, headers, data, cookies=None):
     data_ = ast.literal_eval(data)
     # response = requests.post(url, headers=ast.literal_eval(headers), json=data_, timeout=(3, 3)).text
-    response = requests.post(url, headers=ast.literal_eval(headers), json=data_, timeout=(5, 5))
+    response = requests.post(url, headers=ast.literal_eval(headers), json=data_, cookies=cookies, timeout=(5, 5))
     response_time = response.elapsed.total_seconds()
     # return response.text, response_time
     return response, response_time
 
 
-def request_api_get_form(url, headers, payload):
+def request_api_get_form(url, headers, payload, cookies=None):
     # response = requests.get(url, headers=ast.literal_eval(headers), params=payload, timeout=(3, 3)).text
-    response = requests.get(url, headers=ast.literal_eval(headers), params=payload, timeout=(5, 5))
+    response = requests.get(url, headers=ast.literal_eval(headers), params=payload, cookies=cookies, timeout=(5, 5))
     response_time = response.elapsed.total_seconds()
     # return response.text, response_time
     return response, response_time
 
 
-def request_api_get_json(url, headers, payload):
+def request_api_get_json(url, headers, payload, cookies=None):
     payload_ = ast.literal_eval(payload)
     # response = requests.get(url, headers=ast.literal_eval(headers), params=payload_, timeout=(3, 3)).text
-    response = requests.get(url, headers=ast.literal_eval(headers), params=payload_, timeout=(5, 5))
+    response = requests.get(url, headers=ast.literal_eval(headers), params=payload_, cookies=cookies, timeout=(5, 5))
     response_time = response.elapsed.total_seconds()
     # return response.text, response_time
     return response, response_time
 
 
-def request_results(domain_name, addre, headers, data_type, data, request_type, Actual_results):
+def request_results(domain_name, addre, headers, data_type, data, request_type, Actual_results, cookies):
     steelphone_domain_name = str(domain_name)
     url = steelphone_domain_name + addre
     # print("url:", url)
