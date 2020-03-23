@@ -21,17 +21,13 @@ def config_program(url, file_path):
 
     # 参数调用
     parameters_list = {}
-
-    # 钉钉机器人token
-    # url = "https://oapi.dingtalk.com/robot/send?access_token=4c3fe1a2d54d0c51c8d6867c6104cc0e095113f48667e15012b8545043942b49"
-
     data = {"interface_name": [], "headers": [], "domain_name": [], "addre": [], "data_type": [], "data": [], "request_type": [], "Actual_results": [], "response": [], "response_time": [], "result": []}
     # 测试用例文件
     # file_path = './api_test_cases/mysteel_api_cases.xlsx'
     for i in read_csv.read_csv_file(file_path):
         try:
             # 引用保存的参数
-            reference_name = ['reference_parameter', 'reference_header', 'cookies']
+            reference_name = ['reference_parameter', 'reference_header']
             for name_ in reference_name:
                 if len(i[name_]) == 0:
                     pass
@@ -52,24 +48,32 @@ def config_program(url, file_path):
                             elif name_ == 'reference_header':
                                 header_ = i['headers'].split(k)
                                 i['headers'] = header_[0] + str(parameters_list[k]) + header_[1]
-                            elif name_ == 'cookies':
-                                if len(i['cookies']) > 0:
-                                    i['cookies'] = ast.literal_eval(str(parameters_list[k]))
-                                else:
-                                    i['cookies'] = None
-                                print("cookies==================:", i['cookies'])
+                            # elif name_ == 'cookies':
+                            #     if len(i['cookies']) > 0:
+                            #         i['cookies'] = ast.literal_eval(str(parameters_list[k]))
+                            #     else:
+                            #         i['cookies'] = None
+                            #     print("cookies==================:", i['cookies'])
             # 发送请求
-            response_result = request_results(i['domain_name'], i['addre'], i['headers'], i['data_type'], i['data'], i['request_type'], i['Actual_results'], i['cookies'])
+            try:
+                response_result = request_results(i['domain_name'], i['addre'], i['headers'], i['data_type'], i['data'], i['request_type'], i['Actual_results'])
 
-            # 将结果写入字典
-            for j in ("interface_name", "headers", "domain_name", "addre", "data_type", "data", "request_type", "Actual_results"):
-                data[j].append(i[j])
-            data["result"].append(response_result[0])
-            data["response_time"].append(response_result[2])
-            if i["Actual_results"] == 200 or i["Actual_results"] == 404:  # 断言响应码
-                data["response"].append(str(response_result[1].status_code))
-            else:
-                data["response"].append(response_result[1].text)  # 断言响应文本
+                # 将结果写入字典
+                for j in ("interface_name", "headers", "domain_name", "addre", "data_type", "data", "request_type", "Actual_results"):
+                    data[j].append(i[j])
+                data["result"].append(response_result[0])
+                data["response_time"].append(response_result[2])
+                if i["Actual_results"] == 200 or i["Actual_results"] == 404:  # 断言响应码
+                    data["response"].append(str(response_result[1].status_code))
+                else:
+                    data["response"].append(response_result[1].text)  # 断言响应文本
+            except Exception as err:
+                for j in ("interface_name", "headers", "domain_name", "addre", "data_type", "data", "request_type", "Actual_results"):
+                    data[j].append(i[j])
+                data["result"].append("FAIL")
+                data["response_time"].append("5")
+                data["response"].append(str(err))
+                # print(err)
 
             # 获取并保存要使用的参数
             if len(i['extract_word']) == 0:
@@ -82,8 +86,8 @@ def config_program(url, file_path):
                         pass
                     elif kw != 'cookies':
                         a = get_params.select_param(kw, response_result[1].text)
-                    elif kw == 'cookies':
-                        a = response_result[1].cookies.get_dict()
+                    # elif kw == 'cookies':
+                    #     a = response_result[1].cookies.get_dict()
                     parameters_list[i['interface_name'] + '_' + str(j)] = str(a)
                     j += 1
 
