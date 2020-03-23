@@ -42,13 +42,13 @@ def request_results(domain_name, addre, headers, data_type, data, request_type, 
     url = steelphone_domain_name + addre
     # print("url:", url)
     if data_type == "form" and request_type == "post":
-        res = request_api_post_form(url, headers, data)
+        res = request_api_post_form(url, headers, data, cookies)
     elif data_type == "json" and request_type == "post":
-        res = request_api_post_json(url, headers, data)
+        res = request_api_post_json(url, headers, data, cookies)
     elif data_type == "form" and request_type == "get":
-        res = request_api_get_form(url, headers, data)
+        res = request_api_get_form(url, headers, data, cookies)
     elif data_type == "json" and request_type == "get":
-        res = request_api_get_json(url, headers, data)
+        res = request_api_get_json(url, headers, data, cookies)
     else:
         print("请检查接口请求方式！！！")
     # print(res)

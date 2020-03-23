@@ -57,6 +57,7 @@ def config_program(url, file_path):
                                     i['cookies'] = ast.literal_eval(str(parameters_list[k]))
                                 else:
                                     i['cookies'] = None
+                                print("cookies==================:", i['cookies'])
             # 发送请求
             response_result = request_results(i['domain_name'], i['addre'], i['headers'], i['data_type'], i['data'], i['request_type'], i['Actual_results'], i['cookies'])
 
