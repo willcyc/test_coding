@@ -1,5 +1,6 @@
 import sys
 import ast
+import gc
 import pandas as pd
 from api_request import request_results
 from os.path import dirname, abspath
@@ -121,3 +122,8 @@ def config_program(url, file_path):
 
     if 'FAIL' not in data["result"]:
         sendDD.new_req(url, "### " + file_name + "接口测试通过！！！", file_name + "接口测试全部通过！！！")
+
+    # print("0:", data)
+    # 删除内存中的变量
+    del data
+    gc.collect()

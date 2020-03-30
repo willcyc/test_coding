@@ -30,16 +30,17 @@ url = "https://oapi.dingtalk.com/robot/send?access_token=4c3fe1a2d54d0c51c8d6867
 #     test_case_name01 = path_ + str(i)
 #     config_program(url, test_case_name01)
 
+files = range(len(file_names))
 
-def many_thread():
-    threads = []
-    for i in file_names:
-        test_case_name01 = path_ + str(i)
-        t = threading.Thread(target=config_program(url, test_case_name01), args=(10,))
-        threads.append(t)
-    for t in threads:
-        t.start()
+threads = []
+for i in file_names:
+    test_case_name01 = path_ + str(i)
+    t = threading.Thread(target=config_program(url, test_case_name01), args=(i, ))
+    threads.append(t)
 
 
 if __name__ == '__main__':
-    many_thread()
+    for i in files:
+        threads[i].start()
+    for i in files:
+        threads[i].join()
